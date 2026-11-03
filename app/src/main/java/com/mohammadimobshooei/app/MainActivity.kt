@@ -50,7 +50,7 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
         previousResponseId = prefs.getString("previous_response_id", null)
         tts = TextToSpeech(this, this)
         buildInterface()
-        addMessage("assistant", "سلام. من دستیار هوشمند تو هستم و با مدل Grok 4.7 کار می‌کنم. برای شروع، کلید API را از تنظیمات وارد کن.")
+        addMessage("assistant", "سلام. من دستیار هوشمند تو هستم و با مدل Grok 4.7 در حالت سریع کار می‌کنم. برای شروع، کلید API را از تنظیمات وارد کن.")
         if (getApiKey().isNullOrBlank()) showApiKeyDialog()
     }
 
@@ -79,7 +79,7 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
         root.addView(top)
 
         status = TextView(this).apply {
-            text = "مدل: Grok 4.7"
+            text = "مدل: Grok 4.7 | سریع"
             textSize = 12f
             setTextColor(Color.rgb(120, 210, 190))
             setPadding(4, 4, 4, 10)
@@ -183,7 +183,7 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
                 put("content", message)
             }))
             put("store", true)
-            put("reasoning", JSONObject().put("effort", "medium"))
+            put("reasoning", JSONObject().put("effort", "low"))
             previousResponseId?.let { put("previous_response_id", it) }
         }.toString().toByteArray(StandardCharsets.UTF_8)
 
@@ -230,7 +230,7 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
     private fun setBusy(busy: Boolean) {
         sendButton.isEnabled = !busy
         voiceButton.isEnabled = !busy
-        status.text = if (busy) "Grok در حال پاسخ‌گویی است…" else "مدل: Grok 4.7"
+        status.text = if (busy) "Grok در حال پاسخ‌گویی است…" else "مدل: Grok 4.7 | سریع"
     }
 
     private fun startVoiceInput() {
