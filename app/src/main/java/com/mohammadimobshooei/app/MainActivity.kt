@@ -143,7 +143,7 @@ class MainActivity : Activity() {
             setPadding(28, 20, 28, 8)
         }
         val note = TextView(this).apply {
-            text = "متن شناسایی‌شده (برای ترجمه، آن را با برنامه دلخواه به اشتراک بگذار):"
+            this.text = "متن شناسایی‌شده (برای ترجمه، آن را با برنامه دلخواه به اشتراک بگذار):"
             textSize = 14f
         }
         val body = TextView(this).apply {
