@@ -39,6 +39,7 @@ class ScreenCaptureService : Service() {
     private var imageReader: ImageReader? = null
     private var workerThread: HandlerThread? = null
     private var captureStarted = false
+    private var finished = false
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -183,6 +184,8 @@ class ScreenCaptureService : Service() {
     }
 
     private fun finishWithText(text: String) {
+        if (finished) return
+        finished = true
         try {
             sendBroadcast(Intent(ACTION_TEXT_READY).setPackage(packageName).putExtra(EXTRA_TEXT, text))
         } catch (_: Exception) {
